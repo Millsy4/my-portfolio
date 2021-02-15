@@ -1,0 +1,136 @@
+/*
+Ben Comroe on Stack Overflow
+https://stackoverflow.com/questions/35505071/bottom-border-on-bootstrap-row
+
+Used to add an underline underneath my header row
+*/
+.row-bordered {
+  position: relative;
+}
+
+.row-bordered:after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid black;
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  right: 15px;
+}
+
+/*
+28 and 43 are used to make the footer stick to the bottom of the screen,
+it essentially calculates the difference between 100% of the viewport for the
+background container and the header and footer to place the footer at the bottom
+of the page
+*/
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
+/*
+Background image comes from https://www.pexels.com/search/website%20background/
+where he lists free background images for non-commercial use
+*/
+
+#backgroundContainer {
+  background-image: url("../../images/mainBackground.jpg");
+  padding-top: 90px;
+  min-height: calc(100vh - 120px);
+  background-size: cover;
+}
+
+#mainContentContainer {
+  max-width: 800px;
+  background-image: url("../../images/paintSplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#mainHeader {
+  color: black;
+  font-family: Viga;
+  font-size: 40px;
+}
+
+#nameLabel {
+  margin-top: 10px;
+  color: black;
+  font-family: Viga;
+}
+
+#aboutMeImg {
+  max-width: 304px;
+  max-height: 419px;
+}
+
+#getName,
+#getEmail,
+#getMessage {
+  font-family: Caudex;
+}
+
+#emailLabel,
+#messageLabel,
+#aboutMeHeading {
+  color: black;
+  font-family: Viga;
+}
+
+#submitButton {
+  background-color: black;
+  color: white;
+  font-family: Viga;
+}
+
+#aboutMeParas {
+  color: black;
+  font-family: Caudex;
+}
+
+#aboutMeSig {
+  color: black;
+  font-size: 24px;
+  font-family: Dancing Script;
+}
+
+#portfolioRow {
+  padding-bottom: 10px;
+}
+
+#portfolioTopFigure {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+#portfolioHeader {
+  color: black;
+  font-family: Viga;
+  font-size: 25px;
+  text-align: center;
+}
+
+#portfolioFigure {
+  padding-top: 25px;
+}
+
+.githubDeployed,
+.githubRepo,
+.githubDeployedLink,
+.githubRepoLink {
+  text-align: center;
+}
+
+.portfolioPara {
+  color: white;
+  padding-top: 20px;
+  padding-left: 20px;
+  font-family: Caudex;
+}

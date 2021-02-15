@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import "./Header.css";
 
 function Header() {
   const location = useLocation();
@@ -7,12 +8,10 @@ function Header() {
   return (
     <div>
       <nav
-        className="navbar navbar-expand-lg navbar-dark"
-        style={{backgroundColor : "black" }}
+        className="navbar navbar-expand-lg navbar-dark" id="navbarStyle"
       >
         <span
-          className="navbar-brand mb-1 h1"
-          style={{color: "rgba(255,255,255,.5)", fontFamily: "Viga"}}
+          className="navbar-brand mb-1 h1" id="nameStyle"
         >
           Christian Mills
         </span>
@@ -39,7 +38,7 @@ function Header() {
                 About Me
               </Link>
             </li>
-            <li class="nav-item ml-auto">
+            <li className="nav-item ml-auto">
               <Link
                 to="/contact"
                 className={
@@ -51,7 +50,7 @@ function Header() {
                 Contact
               </Link>
             </li>
-            <li class="nav-item ml-auto">
+            <li className="nav-item ml-auto">
               <Link
                 to="/portfolio"
                 className={
