@@ -6,7 +6,6 @@ function Footer() {
   return (
     <div className="page-footer clearfix">
       <section className="footer-copyright text-center py-3" id="footerSection">
-        {" "}
         Christian Mills |
         <a href="mailto:chrmills4@gmail.com">chrmills4@gmail.com</a> |
         <a href="tel:+16204308514">620-430-8514</a> |
