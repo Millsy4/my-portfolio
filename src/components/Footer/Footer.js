@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import resumePDF from "../../assets/Christian_Resume.pdf";
 
 function Footer() {
   return (
@@ -9,7 +10,7 @@ function Footer() {
         Christian Mills |
         <a href="mailto:chrmills4@gmail.com">chrmills4@gmail.com</a> |
         <a href="tel:+16204308514">620-430-8514</a> |
-        <a href="./assets/Christian_Resume.pdf">Resume</a>
+        <a href={resumePDF} target="_blank">Resume</a>
         <a
           className="btn btn-outline-primary btn-sm"
           href="https://www.linkedin.com/in/christian-mills-7ba9701b0/"
