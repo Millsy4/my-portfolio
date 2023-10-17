@@ -80,8 +80,9 @@
     
     <!-- The JS SDK Login Button -->
     
-    <div class="fb-login-button" data-width="100" data-size="" data-button-type="" data-layout="" data-auto-logout-link="true" data-use-continue-as="true"></div>
-    
+    <fb:login-button scope="public_profile,email" data-width="100" data-size="" data-button-type="" data-layout="" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();">
+</fb:login-button>
+
     <div id="status">
     </div>
     
