@@ -11,9 +11,6 @@ function Index() {
         <section className="row row-bordered pt-2">
           <section className="col-sm-12">
             <h2 id="aboutMeHeading">About Me</h2>
-            <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId=1041252743860541" nonce="S2oswfCa"></script>
-<div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
           </section>
         </section>
         <section className="row">
