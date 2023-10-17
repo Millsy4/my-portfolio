@@ -52,7 +52,7 @@
       }
     
     
-      window.fbAsyncInit = function() {
+      fbAsyncInit = function() {
         FB.init({
           appId      : '1041252743860541',
           cookie     : true,                     // Enable cookies to allow the server to access the session.
@@ -80,7 +80,7 @@
     
     <!-- The JS SDK Login Button -->
     
-    <fb:login-button scope="public_profile,email" data-width="100" data-size="" data-button-type="" data-layout="" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();">
+    <fb:login-button scope="public_profile,email" data-width="100" data-size="" data-button-type="" data-layout="" data-auto-logout-link="true" data-use-continue-as="true" onclick="fbAsyncInit()">
 </fb:login-button>
 
     <div id="status">
