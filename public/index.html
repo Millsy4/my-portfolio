@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -24,184 +22,215 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Caudex&family=Dancing+Script&family=Viga&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/c34c6a39f5.js" crossorigin="anonymous"></script>
-  </head>
-  <body>
+  <title>React App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Caudex&family=Dancing+Script&family=Viga&display=swap"
+    rel="stylesheet">
+  <script src="https://kit.fontawesome.com/c34c6a39f5.js" crossorigin="anonymous"></script>
+</head>
 
-    <p>Sheets API Quickstart</p>
+<body>
 
-    <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
-    <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
+  <p>Sheets API Quickstart</p>
 
-    <pre id="content" style="white-space: pre-wrap;"></pre>
+  <!--Add buttons to initiate auth sequence and sign out-->
+  <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
+  <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
 
-    <script type="text/javascript">
-      /* exported gapiLoaded */
-      /* exported gisLoaded */
-      /* exported handleAuthClick */
-      /* exported handleSignoutClick */
+  <pre id="content" style="white-space: pre-wrap;"></pre>
 
-      // TODO(developer): Set to client ID and API key from the Developer Console
-      const CLIENT_ID = '637300587341-r4n76tufi8a6k9h6pbgjo6fqfsqkom70.apps.googleusercontent.com';
-      const API_KEY = 'AIzaSyDXNt85oBx2D7Ah4ykzh97m4HKR4TvMO3k';
+  <script type="text/javascript">
+    /* exported gapiLoaded */
+    /* exported gisLoaded */
+    /* exported handleAuthClick */
+    /* exported handleSignoutClick */
 
-      // Discovery doc URL for APIs used by the quickstart
-      const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
+    // TODO(developer): Set to client ID and API key from the Developer Console
+    const CLIENT_ID = '637300587341-r4n76tufi8a6k9h6pbgjo6fqfsqkom70.apps.googleusercontent.com';
+    const API_KEY = 'AIzaSyDXNt85oBx2D7Ah4ykzh97m4HKR4TvMO3k';
 
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+    // Discovery doc URL for APIs used by the quickstart
+    const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
 
-      let tokenClient;
-      let gapiInited = false;
-      let gisInited = false;
+    // Authorization scopes required by the API; multiple scopes can be
+    // included, separated by spaces.
+    const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly https://www.googleapis.com/auth/spreadsheets';
 
-      document.getElementById('authorize_button').style.visibility = 'hidden';
-      document.getElementById('signout_button').style.visibility = 'hidden';
+    let tokenClient;
+    let gapiInited = false;
+    let gisInited = false;
 
-      /**
-       * Callback after api.js is loaded.
-       */
-      function gapiLoaded() {
-        gapi.load('client', initializeGapiClient);
+    document.getElementById('authorize_button').style.visibility = 'hidden';
+    document.getElementById('signout_button').style.visibility = 'hidden';
+
+    /**
+     * Callback after api.js is loaded.
+     */
+    function gapiLoaded() {
+      gapi.load('client', initializeGapiClient);
+    }
+
+    /**
+     * Callback after the API client is loaded. Loads the
+     * discovery doc to initialize the API.
+     */
+    async function initializeGapiClient() {
+      await gapi.client.init({
+        apiKey: API_KEY,
+        discoveryDocs: [DISCOVERY_DOC],
+      });
+      gapiInited = true;
+      maybeEnableButtons();
+    }
+
+    /**
+     * Callback after Google Identity Services are loaded.
+     */
+    function gisLoaded() {
+      tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CLIENT_ID,
+        scope: SCOPES,
+        callback: '', // defined later
+      });
+      gisInited = true;
+      maybeEnableButtons();
+    }
+
+    /**
+     * Enables user interaction after all libraries are loaded.
+     */
+    function maybeEnableButtons() {
+      if (gapiInited && gisInited) {
+        document.getElementById('authorize_button').style.visibility = 'visible';
       }
+    }
 
-      /**
-       * Callback after the API client is loaded. Loads the
-       * discovery doc to initialize the API.
-       */
-      async function initializeGapiClient() {
-        await gapi.client.init({
-          apiKey: API_KEY,
-          discoveryDocs: [DISCOVERY_DOC],
-        });
-        gapiInited = true;
-        maybeEnableButtons();
-      }
-
-      /**
-       * Callback after Google Identity Services are loaded.
-       */
-      function gisLoaded() {
-        tokenClient = google.accounts.oauth2.initTokenClient({
-          client_id: CLIENT_ID,
-          scope: SCOPES,
-          callback: '', // defined later
-        });
-        gisInited = true;
-        maybeEnableButtons();
-      }
-
-      /**
-       * Enables user interaction after all libraries are loaded.
-       */
-      function maybeEnableButtons() {
-        if (gapiInited && gisInited) {
-          document.getElementById('authorize_button').style.visibility = 'visible';
+    /**
+     *  Sign in the user upon button click.
+     */
+    function handleAuthClick() {
+      tokenClient.callback = async (resp) => {
+        if (resp.error !== undefined) {
+          throw (resp);
         }
-      }
-
-      /**
-       *  Sign in the user upon button click.
-       */
-      function handleAuthClick() {
-        tokenClient.callback = async (resp) => {
-          if (resp.error !== undefined) {
-            throw (resp);
-          }
-          document.getElementById('signout_button').style.visibility = 'visible';
-          document.getElementById('authorize_button').innerText = 'Refresh';
-          await appendValuesToSpreadsheet();
-        };
-
-        if (gapi.client.getToken() === null) {
-          // Prompt the user to select a Google Account and ask for consent to share their data
-          // when establishing a new session.
-          tokenClient.requestAccessToken({prompt: 'consent'});
-        } else {
-          // Skip display of account chooser and consent dialog for an existing session.
-          tokenClient.requestAccessToken({prompt: ''});
-        }
-      }
-
-      /**
-       *  Sign out the user upon button click.
-       */
-      function handleSignoutClick() {
-        const token = gapi.client.getToken();
-        if (token !== null) {
-          google.accounts.oauth2.revoke(token.access_token);
-          gapi.client.setToken('');
-          document.getElementById('content').innerText = '';
-          document.getElementById('authorize_button').innerText = 'Authorize';
-          document.getElementById('signout_button').style.visibility = 'hidden';
-        }
-      }
-
-      /**
-       * Print the names and majors of students in a sample spreadsheet:
-       * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-       */
-      async function appendValuesToSpreadsheet() {
-        let response;
-        try {
-          response = await gapi.client.sheets.spreadsheets.batchUpdate({
-              appendCells:{ 
-                "sheetId": "1dNPsuEKi50jBLiOfc9IrVwLg7QOk5Zk5W3aEDJyxdr4",
-                "rows": [{
-                "Name": "Christian Mills2",
-                "Gender": "XYZ",
-                "Age": "29"
-              }, {
-                "Name": "Christian Mills3",
-                "Gender": "ZYX",
-                "Age": "34"
-              }]
-            }
-          })
-        } catch (err) {
-          document.getElementById('content').innerText = err.message;
-          return;
-        }
+        document.getElementById('signout_button').style.visibility = 'visible';
+        document.getElementById('authorize_button').innerText = 'Refresh';
+        await appendValuesToSpreadsheet();
       };
 
-      // async function listMajors() {
-      //   let response;
-      //   try {
-      //     // Fetch first 10 files
-      //     response = await gapi.client.sheets.spreadsheets.values.get({
-      //       spreadsheetId: '1dNPsuEKi50jBLiOfc9IrVwLg7QOk5Zk5W3aEDJyxdr4',
-      //       range: 'Sheet1!A1:C4',
-      //     });
-      //   } catch (err) {
-      //     document.getElementById('content').innerText = err.message;
-      //     return;
-      //   }
-      //   console.log(response);
-      //   const range = response.result;
-      //   if (!range || !range.values || range.values.length == 0) {
-      //     document.getElementById('content').innerText = 'No values found.';
-      //     return;
-      //   }
-      //   // Flatten to string to display
-      //   let output;
-      //   for (var i = 0; i < range.length; i++) {
-      //     console.log(response.result.values[i]);
-      //   }
+      if (gapi.client.getToken() === null) {
+        // Prompt the user to select a Google Account and ask for consent to share their data
+        // when establishing a new session.
+        tokenClient.requestAccessToken({ prompt: 'consent' });
+      } else {
+        // Skip display of account chooser and consent dialog for an existing session.
+        tokenClient.requestAccessToken({ prompt: '' });
+      }
+    }
 
-      //   document.getElementById('content').innerText = output;
+    /**
+     *  Sign out the user upon button click.
+     */
+    function handleSignoutClick() {
+      const token = gapi.client.getToken();
+      if (token !== null) {
+        google.accounts.oauth2.revoke(token.access_token);
+        gapi.client.setToken('');
+        document.getElementById('content').innerText = '';
+        document.getElementById('authorize_button').innerText = 'Authorize';
+        document.getElementById('signout_button').style.visibility = 'hidden';
+      }
+    }
+
+    /**
+     * Print the names and majors of students in a sample spreadsheet:
+     * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+     */
+    async function appendValuesToSpreadsheet() {
+      let response;
+      const request = {
+        spreadsheetId: "1dNPsuEKi50jBLiOfc9IrVwLg7QOk5Zk5W3aEDJyxdr4",
+        range: "Sheet1!A:C",
+        valueInputOption: "USER_ENTERED",
+        insertDataOption: "INSERT_ROWS",
+        resource: {
+          "majorDimension": "ROWS",
+          "values": [["CMILLS2", "XYZ", 29], ["CMILLS3", "ZYX", 34]]
+        }
+      }
+
+      try {
+        const response = (await gapi.client.sheets.spreadsheets.values.append(request)).data;
+        console.log(JSON.stringify(response, null, 2));
+      } catch (err) {
+        console.error(err);
+      }
+      // try {
+      //   response = await gapi.client.sheets.spreadsheets.values.append({
+      //     spreadsheetId: "1dNPsuEKi50jBLiOfc9IrVwLg7QOk5Zk5W3aEDJyxdr4",
+      //     range: 'Sheet1!A1:C3',
+      //     valueInputOption: "USER_ENTERED",
+      //     resource: {
+      //       majorDimension: "ROWS",
+      //       values: [
+      //       "Christian Mills2",
+      //       "XYZ",
+      //       "29",
+      //       "Christian Mills3",
+      //       "ZYX",
+      //       "34"
+      //     ]
+      //     }
+      //     //   values: [{
+      //     //   "Name": "Christian Mills2",
+      //     //   "Gender": "XYZ",
+      //     //   "Age": "29"
+      //     // }, {
+      //     //   "Name": "Christian Mills3",
+      //     //   "Gender": "ZYX",
+      //     //   "Age": "34"
+      //     // }]
+      //   })
+      // } catch (err) {
+      //   document.getElementById('content').innerText = err.message;
+      //   return;
       // }
-    </script>
-    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+    };
+
+    // async function listMajors() {
+    //   let response;
+    //   try {
+    //     // Fetch first 10 files
+    //     response = await gapi.client.sheets.spreadsheets.values.get({
+    //       spreadsheetId: '1dNPsuEKi50jBLiOfc9IrVwLg7QOk5Zk5W3aEDJyxdr4',
+    //       range: 'Sheet1!A1:C4',
+    //     });
+    //   } catch (err) {
+    //     document.getElementById('content').innerText = err.message;
+    //     return;
+    //   }
+    //   console.log(response);
+    //   const range = response.result;
+    //   if (!range || !range.values || range.values.length == 0) {
+    //     document.getElementById('content').innerText = 'No values found.';
+    //     return;
+    //   }
+    //   // Flatten to string to display
+    //   let output;
+    //   for (var i = 0; i < range.length; i++) {
+    //     console.log(response.result.values[i]);
+    //   }
+
+    //   document.getElementById('content').innerText = output;
+    // }
+  </script>
+  <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+  <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -211,5 +240,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>
