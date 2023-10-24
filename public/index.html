@@ -150,9 +150,10 @@
       async function appendValuesToSpreadsheet() {
         let response;
         try {
-          response = await gapi.client.sheets.spreadsheets.batchUpdate.appendCells({
-              sheetId: '1dNPsuEKi50jBLiOfc9IrVwLg7QOk5Zk5W3aEDJyxdr4',
-              rows: [{
+          response = await gapi.client.sheets.spreadsheets.batchUpdate({
+              appendCells:{ 
+                "sheetId": "1dNPsuEKi50jBLiOfc9IrVwLg7QOk5Zk5W3aEDJyxdr4",
+                "rows": [{
                 "Name": "Christian Mills2",
                 "Gender": "XYZ",
                 "Age": "29"
@@ -161,6 +162,7 @@
                 "Gender": "ZYX",
                 "Age": "34"
               }]
+            }
           })
         } catch (err) {
           document.getElementById('content').innerText = err.message;
